@@ -10,11 +10,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js/,
+        test: /\.js$/,
         loader: "babel-loader",
         exclude: /node_modules/,
         options: {
-          presets: ["@babel/preset-env", "@babel/preset-react"], // preset-env allows use of the latest JavaScript; preset-react allows use of jsx
+          presets: [["@babel/preset-env",{
+            targets: [
+              'last 4 versions',
+              'not dead',
+              'not < 1%',
+              'not ie 11'
+            ],
+            useBuiltIns:'entry'
+          }], "@babel/preset-react"], // preset-env allows use of the latest JavaScript; preset-react allows use of jsx
           plugins: [
             'react-hot-loader/babel',
             "@babel/plugin-proposal-class-properties", // transforms static class properties
